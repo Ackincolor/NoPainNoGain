@@ -2,6 +2,7 @@ package controler;
 
 import java.awt.event.MouseAdapter;
 import vue.Map;
+import Utils.PolygonMy;
 import java.awt.event.MouseEvent;;
 
 public class mapControler extends MouseAdapter {
@@ -11,13 +12,16 @@ public class mapControler extends MouseAdapter {
 		// TODO Auto-generated constructor stub
 		this.map = map;
 	}
-	public void mouseCLicked(MouseEvent e)
+	public void mouseClicked(MouseEvent e)
 	{
-		this.map.setCLicked(e.getSource());
+		this.map.setClicked();
+		this.map.send_data();
+		this.map.repaint();
 	}
 	public void mouseMoved(MouseEvent e)
 	{
 		this.map.setMousePos(e.getX(), e.getY());
+		//System.out.println("x:"+e.getX()+"y:"+e.getY());
 		this.map.repaint();
 	}
 

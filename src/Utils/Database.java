@@ -23,7 +23,7 @@ public class Database {
 	{
 		e.printStackTrace();
 	}
-	System.out.println("Connected !");
+	
 	}
 	public static Connection getConnection(String URL, String USER, String PASSWORD) throws SQLException {
 		return DriverManager.getConnection(URL, USER, PASSWORD);
