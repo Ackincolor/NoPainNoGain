@@ -35,7 +35,7 @@ public class Map extends JPanel {
 		if(this.rightPanel != null)
 		{
 			this.rightPanel.send(this.clicked);
-			this.rightPanel.getVue().setBackground(Color.BLACK);
+			this.rightPanel.getVue().repaint();
 		}
 		else
 		{

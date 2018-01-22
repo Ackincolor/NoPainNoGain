@@ -3,6 +3,8 @@
  */
 package vue;
 
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 /**
  * @author Predator-Lois
@@ -12,13 +14,17 @@ import javax.swing.JPanel;
 public class RightPanelVue extends JPanel{
 	private int idEmplacement = -1;
 	private String nomBoutique = "";
-	private int surface = 0;
+	private String surface = "";
 	private JLabel label_boutique;
+	private JLabel label_surface;
 	public RightPanelVue()
 	{
 		super();
+		this.setLayout(new GridLayout(8,1));
 		this.label_boutique = new JLabel("");
+		this.label_surface = new JLabel("");
 		this.add(this.label_boutique);
+		this.add(this.label_surface);
 	}
 	public int getIdEmplacement() {
 		return idEmplacement;
@@ -33,11 +39,12 @@ public class RightPanelVue extends JPanel{
 		this.nomBoutique = nomBoutique;
 		this.label_boutique.setText(this.nomBoutique);
 	}
-	public int getSurface() {
+	public String getSurface() {
 		return surface;
 	}
-	public void setSurface(int surface) {
+	public void setSurface(String surface) {
 		this.surface = surface;
+		this.label_surface.setText(this.surface);
 	}
 	
 	
