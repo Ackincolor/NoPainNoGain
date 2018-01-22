@@ -11,6 +11,8 @@ import javax.swing.JLabel;
  *
  */
 import javax.swing.JPanel;
+
+import Utils.Constants;
 public class RightPanelVue extends JPanel{
 	private int idEmplacement = -1;
 	private String nomBoutique = "";
@@ -21,6 +23,7 @@ public class RightPanelVue extends JPanel{
 	{
 		super();
 		this.setLayout(new GridLayout(8,1));
+		this.setSize(150, Constants.WINDOW_HEIGHT);
 		this.label_boutique = new JLabel("");
 		this.label_surface = new JLabel("");
 		this.add(this.label_boutique);

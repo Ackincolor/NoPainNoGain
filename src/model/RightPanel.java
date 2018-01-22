@@ -68,8 +68,8 @@ public class RightPanel {
 	{
 		int[] res = {0,0};
 		//System.out.println(arrayof_X.length);
-		int[] arrayof_X = Arrays.copyOf(this.polygon.xpoints, this.polygon.npoints+1);
-		int[] arrayof_Y = Arrays.copyOf(this.polygon.ypoints, this.polygon.npoints+1);
+		int[] arrayof_X = Arrays.copyOf(this.polygon.new_x, this.polygon.npoints+1);
+		int[] arrayof_Y = Arrays.copyOf(this.polygon.new_y, this.polygon.npoints+1);
 		//System.out.println(arrayof_X.length);
 		//ajout du dernier point
 		arrayof_X[this.polygon.npoints] = arrayof_X[0]; 

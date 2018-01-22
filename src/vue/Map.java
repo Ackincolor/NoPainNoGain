@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.Color;
 
 import Utils.PolygonMy;
@@ -13,10 +15,12 @@ public class Map extends JPanel {
 	private ArrayList<PolygonMy> emplacements;
 	private PolygonMy clicked = null;
 	private RightPanel rightPanel= null;
+	private Image img1;
 	//private Point mouse_position;
 	public Map() {
 		// TODO Auto-generated constructor stub
 		this.emplacements = new ArrayList<PolygonMy>();
+		this.img1 = Toolkit.getDefaultToolkit().getImage("src/res/PlanCentreCo.png");
 	}
 	public void add_polygon(int[] poly_x,int[] poly_y)
 	{
@@ -26,6 +30,13 @@ public class Map extends JPanel {
 	{
 		this.emplacements.add(poly);
 	}
+	public void refresh()
+	{
+		for(PolygonMy poly : this.emplacements)
+		{
+			poly.refresh(this.getSize());
+		}
+	}
 	public void set_rightPanel(RightPanel rp)
 	{
 		this.rightPanel = rp;
@@ -34,6 +45,7 @@ public class Map extends JPanel {
 	{
 		if(this.rightPanel != null)
 		{
+			if(this.clicked!=null)
 			this.rightPanel.send(this.clicked);
 			this.rightPanel.getVue().repaint();
 		}
@@ -56,11 +68,13 @@ public class Map extends JPanel {
 	}
 	public void setMousePos(int x,int y)
 	{
+		//System.out.println(x+";"+y);
 		for(PolygonMy poly: this.emplacements)
 		{
 			if(poly.contains(x, y))
 			{
 				poly.setSelected(true);
+				//System.out.println("IN");
 			}
 			else
 			{
@@ -71,10 +85,13 @@ public class Map extends JPanel {
 	@Override
 	public void paintComponent(Graphics g)
 	{
+		
+	    
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setColor(Color.WHITE);
-		g2.fillRect(0, 0, this.getWidth(), this.getHeight());
+		//g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g2.setColor(Color.BLACK);
+		g2.drawImage(this.img1, 0 , 0,this.getWidth(), this.getHeight(), this);
 		for(PolygonMy poly: this.emplacements)
 		{
 			//System.out.println("dessin d'un poly");

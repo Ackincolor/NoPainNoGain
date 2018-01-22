@@ -116,6 +116,7 @@ public class Fenetre extends JFrame implements Runnable{
 			{
 				int x = res.getInt(1);
 				int y = res.getInt(2);
+				
 				int id = res.getInt(3);
 				if(id!=curID)
 				{
@@ -138,6 +139,7 @@ public class Fenetre extends JFrame implements Runnable{
 		}
 		for(PolygonMy poly : polyTab)
 		{
+			poly.setnew();
 			this.map.add_polygon(poly);
 		}
 		this.repaint();
@@ -158,5 +160,7 @@ public class Fenetre extends JFrame implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		this.setVisible(true);
+		this.map.refresh();
+		this.repaint();
 	}
 }

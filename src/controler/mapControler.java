@@ -3,9 +3,11 @@ package controler;
 import java.awt.event.MouseAdapter;
 import vue.Map;
 import Utils.PolygonMy;
-import java.awt.event.MouseEvent;;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;;
 
-public class mapControler extends MouseAdapter {
+public class mapControler extends MouseAdapter{
 
 	private Map map;
 	public mapControler(Map map) {
@@ -22,6 +24,7 @@ public class mapControler extends MouseAdapter {
 	{
 		this.map.setMousePos(e.getX(), e.getY());
 		//System.out.println("x:"+e.getX()+"y:"+e.getY());
+		this.map.refresh();
 		this.map.repaint();
 	}
 
