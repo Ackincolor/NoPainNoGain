@@ -7,4 +7,6 @@ public final class Constants {
 	public final static int IMAGE_HEIGHT = 1032;
 	public final static int MAP_HEIGHT = 721;
 	public final static int MAP_WIDTH = 999;
+	public final static float ECHELLE_MAP = 7.6f;//pour 8 pixel
+	
 }

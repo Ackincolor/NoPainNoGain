@@ -5,6 +5,7 @@ package vue;
 
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 /**
  * @author Predator-Lois
@@ -19,6 +20,7 @@ public class RightPanelVue extends JPanel{
 	private String surface = "";
 	private JLabel label_boutique;
 	private JLabel label_surface;
+	private JButton voir_plus;
 	public RightPanelVue()
 	{
 		super();
@@ -26,8 +28,10 @@ public class RightPanelVue extends JPanel{
 		this.setSize(150, Constants.WINDOW_HEIGHT);
 		this.label_boutique = new JLabel("");
 		this.label_surface = new JLabel("");
+		this.voir_plus = new JButton("Voir plus");
 		this.add(this.label_boutique);
 		this.add(this.label_surface);
+		this.add(this.voir_plus);
 	}
 	public int getIdEmplacement() {
 		return idEmplacement;

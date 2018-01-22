@@ -85,7 +85,9 @@ public class RightPanel {
 					res[i] += arrayof_X[j+1]*arrayof_Y[j];
 			}
 		}
-		float surface = (res[0] - res[1]) /2; 
+		float surface = (res[0] - res[1]) /2;
+		//application de l'echelle
+		surface = (float) (surface*0.93);
 		//System.out.print(surface+"m²");
 		//il y a donc "surface" pixel sur l'emplacement;
 		this.surface = Float.toString(surface)+" m²";
