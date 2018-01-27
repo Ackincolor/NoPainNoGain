@@ -65,7 +65,7 @@ public class Fenetre extends JFrame implements Runnable{
 		gbc.gridwidth = 1;
 		gbc.gridheight = 5;
 		gbc.anchor = GridBagConstraints.LINE_END;
-		RightPanelVue rpv = new RightPanelVue();
+		RightPanelVue rpv = new RightPanelVue(con);
 		this.add(rpv,gbc);
 		RightPanel rp = new RightPanel(con);
 		rp.setVue(rpv);

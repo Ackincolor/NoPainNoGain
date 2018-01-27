@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.Color;
 
@@ -91,6 +92,7 @@ public class Map extends JPanel {
 		g2.setColor(Color.WHITE);
 		//g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g2.setColor(Color.BLACK);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON); 
 		g2.drawImage(this.img1, 0 , 0,this.getWidth(), this.getHeight(), this);
 		for(PolygonMy poly: this.emplacements)
 		{

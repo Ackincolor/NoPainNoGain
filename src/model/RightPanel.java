@@ -3,6 +3,7 @@
  */
 package model;
 
+import Utils.Database;
 /**
  * @author Predator-Lois
  *
@@ -39,7 +40,7 @@ public class RightPanel {
 		String requete = "SELECT B.nom_boutique FROM Boutique B "
 				+ "JOIN emplacement_boutique eb ON B.idBoutique = eb.id_boutique "
 				+ "WHERE eb.id_emplacement ='"+poly.getIdEmplacement()+"';";
-		System.out.println(requete);
+		//System.out.println(requete);
 		boolean is_res = false;
 		try {
 			Statement stmt = this.con.createStatement();
@@ -91,11 +92,13 @@ public class RightPanel {
 		//System.out.print(surface+"m²");
 		//il y a donc "surface" pixel sur l'emplacement;
 		this.surface = Float.toString(surface)+" m²";
+		this.polygon.setSurface(surface);
 	}
 	private void refresh()
 	{
 		this.rpv.setNomBoutique(this.nom_boutique);
 		this.rpv.setSurface(this.surface);
+		this.rpv.setPolygon(this.polygon);
 		this.rpv.repaint();
 	}
 }

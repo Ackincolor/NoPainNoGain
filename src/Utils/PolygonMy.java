@@ -7,8 +7,10 @@ import java.util.Arrays;
 public class PolygonMy extends Polygon {
 	private boolean selected;
 	private int id_emplacement;
+	private String nom_boutique = "";
 	public int[] new_x;
 	public int[] new_y;
+	private float surface = 0.0f;
 	public PolygonMy() {
 		// TODO Auto-generated constructor stub
 		this.selected = false;
@@ -36,6 +38,14 @@ public class PolygonMy extends Polygon {
 			this.ypoints[i]=(int) ((this.new_y[i]*mapSize.getHeight())/Constants.IMAGE_HEIGHT);
 			//System.out.println(this.new_x[i] + ";" + this.new_y[i]);
 		}
+	}
+	public float getSurface()
+	{
+		return this.surface;
+	}
+	public void setSurface(float sur)
+	{
+		this.surface = sur;
 	}
 	public void setEmplacement(int id)
 	{

@@ -4,6 +4,9 @@
 package vue;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Utils.Constants;
+import Utils.PolygonMy;
 public class RightPanelVue extends JPanel{
 	private int idEmplacement = -1;
 	private String nomBoutique = "";
@@ -21,7 +25,8 @@ public class RightPanelVue extends JPanel{
 	private JLabel label_boutique;
 	private JLabel label_surface;
 	private JButton voir_plus;
-	public RightPanelVue()
+	private PolygonMy polygon;
+	public RightPanelVue(Connection con)
 	{
 		super();
 		this.setLayout(new GridLayout(8,1));
@@ -32,6 +37,18 @@ public class RightPanelVue extends JPanel{
 		this.add(this.label_boutique);
 		this.add(this.label_surface);
 		this.add(this.voir_plus);
+		this.voir_plus.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						if(polygon!=null)
+						javax.swing.SwingUtilities.invokeLater(new Info_Boutique(con,polygon));
+					}	
+				});
+	}
+	public void setPolygon(PolygonMy poly)
+	{
+		this.polygon=poly;
 	}
 	public int getIdEmplacement() {
 		return idEmplacement;
