@@ -20,8 +20,8 @@ public class RightPanel {
 	private PolygonMy polygon;
 	private RightPanelVue rpv = null;
 	private String nom_boutique = "";
-	private String surface = "0 m²";
-	private Connection con=null;
+	private String surface = "0 mï¿½";
+	private Connection con;
 	public RightPanel(Connection con)
 	{
 		this.con = con;
@@ -37,9 +37,10 @@ public class RightPanel {
 	public void send(PolygonMy poly)
 	{
 		this.polygon = poly;
+		this.id_emplacement = poly.getIdEmplacement();
 		String requete = "SELECT B.nom_boutique FROM Boutique B "
 				+ "JOIN emplacement_boutique eb ON B.idBoutique = eb.id_boutique "
-				+ "WHERE eb.id_emplacement ='"+poly.getIdEmplacement()+"';";
+				+ "WHERE eb.id_emplacement ='"+this.id_emplacement+"';";
 		//System.out.println(requete);
 		boolean is_res = false;
 		try {
@@ -63,7 +64,7 @@ public class RightPanel {
 		this.refresh();
 	}
 	/*
-	 * methode qui calcule l'aire de la surface selectionnée
+	 * methode qui calcule l'aire de la surface selectionnï¿½e
 	 */
 	private void calcul_surface()
 	{
@@ -89,14 +90,14 @@ public class RightPanel {
 		float surface = (res[0] - res[1]) /2;
 		//application de l'echelle
 		surface = (float) (surface*0.93);
-		//System.out.print(surface+"m²");
+		//System.out.print(surface+"mï¿½");
 		//il y a donc "surface" pixel sur l'emplacement;
-		this.surface = Float.toString(surface)+" m²";
+		this.surface = Float.toString(surface)+" mÂ²";
 		this.polygon.setSurface(surface);
 	}
 	private void refresh()
 	{
-		this.rpv.setNomBoutique(this.nom_boutique);
+		this.rpv.setNomBoutique(this.nom_boutique+"; id:"+this.id_emplacement);
 		this.rpv.setSurface(this.surface);
 		this.rpv.setPolygon(this.polygon);
 		this.rpv.repaint();

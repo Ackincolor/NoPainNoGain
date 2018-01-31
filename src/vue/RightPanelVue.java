@@ -3,7 +3,7 @@
  */
 package vue;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -30,21 +30,24 @@ public class RightPanelVue extends JPanel{
 	{
 		super();
 		this.setLayout(new GridLayout(8,1));
-		this.setSize(150, Constants.WINDOW_HEIGHT);
+		this.setSize(110, Constants.WINDOW_HEIGHT);
 		this.label_boutique = new JLabel("");
+		this.label_boutique.setPreferredSize(new Dimension(110,30));
 		this.label_surface = new JLabel("");
 		this.voir_plus = new JButton("Voir plus");
 		this.add(this.label_boutique);
 		this.add(this.label_surface);
 		this.add(this.voir_plus);
-		this.voir_plus.addActionListener(new ActionListener()
+		/*this.voir_plus.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
 						if(polygon!=null)
 						javax.swing.SwingUtilities.invokeLater(new Info_Boutique(con,polygon));
 					}	
-				});
+				});*/
+		this.voir_plus.addActionListener(event -> {if(polygon!=null)
+			javax.swing.SwingUtilities.invokeLater(new Info_Boutique(con,polygon));});
 	}
 	public void setPolygon(PolygonMy poly)
 	{
