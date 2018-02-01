@@ -9,6 +9,33 @@ import java.sql.Statement;
 public class Database {
 	// Nom du pilote (driver). Dans ce cas, MySQL
 	private static final String DRIVER_NAME ="org.mariadb.jdbc.Driver";
+	private String url;
+	private String user;
+	private String password;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	static {
 	// Chargement du pilote
@@ -27,6 +54,10 @@ public class Database {
 	}
 	public static Connection getConnection(String URL, String USER, String PASSWORD) throws SQLException {
 		return DriverManager.getConnection(URL, USER, PASSWORD);
+	}
+	public Connection connect() throws SQLException
+	{
+		return DriverManager.getConnection(this.url, this.user, this.password);
 	}
 	//pour un select
 	public static ResultSet executeRequete(String requete, Connection con) {

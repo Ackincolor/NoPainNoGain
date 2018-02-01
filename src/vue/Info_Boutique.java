@@ -3,32 +3,21 @@
  */
 package vue;
 
-import java.awt.BorderLayout;
-import java.awt.GraphicsConfiguration;
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Connection;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
+import Utils.PolygonMy;
+import model.Info_Boutique_Model;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
-import Utils.PolygonMy;
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Connection;
 import model.Article;
-import model.Info_Boutique_Model;
 /**
  * @author loisg
  * 
@@ -59,23 +48,26 @@ public class Info_Boutique extends JFrame implements Runnable{
 	    
 	    JScrollPane pane = new JScrollPane(list);
 	    JButton addButton = new JButton("Export to JSon");
+	    JButton addProduct = new JButton("Add Product");
 	    JPanel panel1 = new JPanel();
+	    JPanel panel2 = new JPanel();
 	    panel1.add(addButton);
 	    /*for (int i = 0; i < 15; i++)
 	      model.addElement("Element " + i);
 		*/
-	    addButton.addActionListener(new ActionListener() {
-	      public void actionPerformed(ActionEvent e) {
+	    addButton.addActionListener(event -> {
 	  		try {
-	  			String s = new String("");
-	  			for(int i = 0;i<model.size();i++)
+	  			String s = new String();
+	  			Object[] article = model.toArray();
+	  			objectMapper.writeValue(new File("articles.json") , article);
+	  			/*for(int i = 0;i<model.size();i++)
 	  			{
 	  				s+=objectMapper.writeValueAsString(model.getElementAt(i));
 	  				s+="\n";
 	  			}
 	  			BufferedWriter writer = new BufferedWriter(new FileWriter("articles.json"));
 	  		    writer.write(s);
-	  		    writer.close();
+	  		    writer.close();*/
 			} catch (JsonGenerationException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -86,14 +78,16 @@ public class Info_Boutique extends JFrame implements Runnable{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	      }
+
 	    });
+	    panel2.add(addProduct);
 	    add(pane, BorderLayout.CENTER);
 	    add(panel1, BorderLayout.WEST);
+	    add(panel2,BorderLayout.EAST);
 	}
 
 	/**
-	 * @param arg0
+	 * @param arg0 premier argument
 	 */
 	public Info_Boutique(GraphicsConfiguration arg0) {
 		super(arg0);
@@ -101,7 +95,7 @@ public class Info_Boutique extends JFrame implements Runnable{
 	}
 
 	/**
-	 * @param arg0
+	 * @param arg0 premier argument
 	 * @throws HeadlessException
 	 */
 	public Info_Boutique(String arg0) throws HeadlessException {
@@ -110,8 +104,8 @@ public class Info_Boutique extends JFrame implements Runnable{
 	}
 
 	/**
-	 * @param arg0
-	 * @param arg1
+	 * @param arg0 premier argument
+	 * @param arg1 deuxieme argument
 	 */
 	public Info_Boutique(String arg0, GraphicsConfiguration arg1) {
 		super(arg0, arg1);

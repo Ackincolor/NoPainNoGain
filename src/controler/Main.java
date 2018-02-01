@@ -7,6 +7,8 @@ package controler;
  * @author loisg
  *
  */
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 
 import javax.swing.JFrame;
@@ -17,6 +19,9 @@ import Utils.Fenetre;
 import Utils.Database;
 import Utils.Constants;
 import controler.mapControler;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import vue.Map;
 import Utils.PolygonMy;
 import java.awt.GridBagLayout;
@@ -31,18 +36,24 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Connection con = null;
-		String url = "jdbc:mariadb://localhost/pdstest";
-		String user = "root";
-		String password = "";
+		ObjectMapper objM = new ObjectMapper();
 		try {
-			con = Database.getConnection(url, user, password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			Database db = objM.readValue(new File("settings.cfg"), Database.class);
+			con = db.connect();
+			Fenetre fen = new Fenetre("Prototype",con);
+			javax.swing.SwingUtilities.invokeLater(fen);
+			fen.populate_map(con);
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Fenetre fen = new Fenetre("Prototype",con);
-		javax.swing.SwingUtilities.invokeLater(fen);
-		fen.populate_map(con);
+
 	}
 }
 

@@ -18,8 +18,8 @@ public class Info_Boutique_Model {
 	
 	public Info_Boutique_Model(Connection con,PolygonMy poly)
 	{
-		this.model = new DefaultListModel<Article>();
-		this.id_boutique = poly.getIdEmplacement();
+		this.model = new DefaultListModel<>();
+		this.id_boutique = poly.getId_boutique();
 		this.id_emplacement = poly.getIdEmplacement();
 		this.surface = poly.getSurface();
 		this.populate_list(con);
@@ -38,26 +38,14 @@ public class Info_Boutique_Model {
 				+ "AND es.id_produit not in ("
 				+ "		SELECT id_produit from sortie_stock"
 				+ "		);";
-		/*
-		 * il manque le fait quil peut y avoir plusieur ajouts et sorites
-		 * SELECT es.id_produit,produit.nom, es.quantité - ss.quantité AS quantité 
-FROM entrée_stock es 
-JOIN produit ON es.id_produit=produit.iDProduit 
-JOIN sortie_stock ss ON es.id_produit = ss.id_produit 
-WHERE es.id_boutique = 1
-UNION SELECT es.id_produit,produit.nom, es.quantité 
-FROM entrée_stock es 
-JOIN produit ON es.id_produit=produit.iDProduit 
-WHERE es.id_boutique = 1
-AND es.id_produit not in (select id_produit from sortie_stock)
-		 */
-		//System.out.println(requete);
+		System.out.println(requete);
 		try
 		{
 			ResultSet res = Database.executeRequete(requete, con);
 			while(res.next())
 			{
 				this.model.addElement(new Article(res.getInt(1),res.getString(2),res.getInt(3)));
+				System.out.println("article");
 			}
 			
 		}catch(SQLException e)

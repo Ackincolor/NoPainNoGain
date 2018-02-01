@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class PolygonMy extends Polygon {
 	private boolean selected;
 	private int id_emplacement;
+	private int id_boutique;
 	private String nom_boutique = "";
 	public int[] new_x;
 	public int[] new_y;
@@ -15,6 +16,7 @@ public class PolygonMy extends Polygon {
 		// TODO Auto-generated constructor stub
 		this.selected = false;
 		this.id_emplacement = -1;
+		this.id_boutique = 0;
 	}
 	public PolygonMy(int[] x,int[] y, int n)
 	{
@@ -54,6 +56,14 @@ public class PolygonMy extends Polygon {
 	public int getIdEmplacement()
 	{
 		return this.id_emplacement;
+	}
+	public void setId_boutique(int id)
+	{
+		this.id_boutique = id;
+	}
+	public int getId_boutique()
+	{
+		return this.id_boutique;
 	}
 	public void setSelected(boolean b)
 	{

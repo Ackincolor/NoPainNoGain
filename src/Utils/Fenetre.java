@@ -103,7 +103,8 @@ public class Fenetre extends JFrame implements Runnable{
 	public void populate_map(Connection con)
 	{
 		//les donnée ici serons recuperé depuis la base
-		String requete = "SELECT coord_X, coord_Y, id_emplacement FROM Emplacement_points";
+		String requete = "SELECT ep.coord_X, ep.coord_Y, ep.id_emplacement, eb.id_boutique FROM Emplacement_points ep " +
+				"LEFT JOIN emplacement_boutique eb ON ep.id_emplacement = eb.id_emplacement;";
 		ArrayList<PolygonMy> polyTab = new ArrayList<PolygonMy>();
 		try {
 			Statement stmt = con.createStatement();
@@ -118,11 +119,13 @@ public class Fenetre extends JFrame implements Runnable{
 				int y = res.getInt(2);
 				
 				int id = res.getInt(3);
+				int boutique = res.getInt(4);
 				if(id!=curID)
 				{
 					curID = id;
 					polyTab.add(index,new PolygonMy());
 					polyTab.get(index).setEmplacement(id);
+					polyTab.get(index).setId_boutique(boutique);
 					polyTab.get(index).addPoint(x, y);
 					index++;
 				}
