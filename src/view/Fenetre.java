@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,10 +14,11 @@ import utils.MyListModel;
 import javax.swing.*;
 
 public class Fenetre extends JFrame implements Runnable{
-    private JPanel panelgauche;
+    private JPanel panelDroit;
     private JButton listTable;
-    private JPanel panelCentre;
+    private JPanel panelGauche;
     private ArrayList<Table> listeTable;
+    private String selectedTable;
     public Fenetre()
     {
         super();
@@ -24,18 +27,22 @@ public class Fenetre extends JFrame implements Runnable{
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.ajouterBouton();
         this.listeTable = new ArrayList<>();
-        this.populatePanelCentre();
+        this.populatepanelGauche();
     }
     private void ajouterBouton()
     {
-        this.panelgauche = new JPanel();
+        this.panelDroit = new JPanel();
         this.listTable = new JButton("liste des tables");
-        this.panelgauche.add(this.listTable);
-        this.getContentPane().add(this.panelgauche);
+        this.panelDroit.add(this.listTable);
+        this.getContentPane().add(this.panelDroit,BorderLayout.WEST);
     }
-    private void populatePanelCentre()
+    private void afficherTable()
     {
-        this.panelCentre = new JPanel();
+        ResultSet res = Constants.DB.getValueTable(this.selectedTable);
+    }
+    private void populatepanelGauche()
+    {
+        this.panelGauche = new JPanel();
 
         ResultSet res = Constants.DB.getListeTable();
         try
@@ -51,8 +58,35 @@ public class Fenetre extends JFrame implements Runnable{
         //creation du model
         MyListModel<Table> listeModel = new MyListModel<>(this.listeTable);
         JList jlist = new JList(listeModel);
-        this.panelCentre.add(jlist);
-        this.add(this.panelCentre);
+        jlist.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                selectedTable = ((Table)jlist.getSelectedValue()).toString();
+                afficherTable();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        this.panelGauche.add(jlist);
+        this.add(this.panelGauche,BorderLayout.CENTER);
 
     }
     @Override

@@ -42,6 +42,19 @@ public class Database {
             return null;
         }
     }
+    public ResultSet getValueTable(String table)
+    {
+        try
+        {
+            Statement stmt = this.con.createStatement();
+            ResultSet res =  stmt.executeQuery("SELECT * FROM "+table+";");
+            stmt.close();
+            return res;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public void connect() throws SQLException
     {
         this.con = DriverManager.getConnection(this.url,this.user,this.password);
