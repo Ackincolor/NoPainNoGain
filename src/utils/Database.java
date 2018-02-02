@@ -1,8 +1,6 @@
 package utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Database {
     private String url,user,password;
@@ -30,6 +28,19 @@ public class Database {
     public Database()
     {
 
+    }
+    public ResultSet getListeTable()
+    {
+        try
+        {
+              Statement stmt = this.con.createStatement();
+              ResultSet res =  stmt.executeQuery("SHOW TABLES;");
+              stmt.close();
+              return res;
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     public void connect() throws SQLException
     {
