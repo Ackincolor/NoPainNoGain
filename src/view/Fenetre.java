@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import model.Table;
 import utils.Constants;
+import utils.MyListModel;
 
 import javax.swing.*;
 
@@ -47,10 +48,11 @@ public class Fenetre extends JFrame implements Runnable{
         {
             e.printStackTrace();
         }
-        for (Table t :this.listeTable)
-        {
-            System.out.println(t);
-        }
+        //creation du model
+        MyListModel<Table> listeModel = new MyListModel<>(this.listeTable);
+        JList jlist = new JList(listeModel);
+        this.panelCentre.add(jlist);
+        this.add(this.panelCentre);
 
     }
     @Override
