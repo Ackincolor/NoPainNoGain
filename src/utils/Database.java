@@ -1,7 +1,12 @@
 package utils;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Database {
-    private String url,usr,password;
+    private String url,user,password;
+    private Connection con;
     /*
     * Chargement du driver de connexion a la base de données.
     * ceci ne s'execute qu'une seul fois
@@ -26,7 +31,14 @@ public class Database {
     {
 
     }
-
+    public void connect() throws SQLException
+    {
+        this.con = DriverManager.getConnection(this.url,this.user,this.password);
+    }
+    public Connection getConnection()
+    {
+        return this.con;
+    }
     public String getUrl() {
         return url;
     }
@@ -35,12 +47,12 @@ public class Database {
         this.url = url;
     }
 
-    public String getUsr() {
-        return usr;
+    public String getuser() {
+        return user;
     }
 
-    public void setUsr(String usr) {
-        this.usr = usr;
+    public void setuser(String user) {
+        this.user = user;
     }
 
     public String getPassword() {
