@@ -3,7 +3,9 @@ package view;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Array;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -36,25 +38,36 @@ public class Fenetre extends JFrame implements Runnable{
         this.panelDroit.add(this.listTable);
         this.getContentPane().add(this.panelDroit,BorderLayout.WEST);
     }
-    private void afficherTable()
-    {
+    private void afficherTable() {
+
         ResultSet res = Constants.DB.getValueTable(this.selectedTable);
+        try {
+            ResultSetMetaData rsMetaData = res.getMetaData();
+            int numberOfColumns = rsMetaData.getColumnCount();
+            //recuperation des info
+            Array[] values = new Array[numberOfColumns];
+            for(int i=0;i<numberOfColumns;i++) {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     private void populatepanelGauche()
     {
-        this.panelGauche = new JPanel();
+            this.panelGauche = new JPanel();
 
-        ResultSet res = Constants.DB.getListeTable();
-        try
-        {
-            while(res.next())
+            ResultSet res = Constants.DB.getListeTable();
+            try
             {
-                this.listeTable.add(new Table(res.getString(1)));
+                while(res.next())
+                {
+                    this.listeTable.add(new Table(res.getString(1)));
+                }
+            }catch(SQLException e)
+            {
+                e.printStackTrace();
             }
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
         //creation du model
         MyListModel<Table> listeModel = new MyListModel<>(this.listeTable);
         JList jlist = new JList(listeModel);

@@ -1,5 +1,7 @@
 package utils;
 
+import model.Table;
+
 import java.sql.*;
 
 public class Database {
@@ -49,7 +51,7 @@ public class Database {
             Statement stmt = this.con.createStatement();
             ResultSet res =  stmt.executeQuery("SELECT * FROM "+table+";");
             stmt.close();
-            return res;
+            return (res);
         }catch(SQLException e) {
             e.printStackTrace();
             return null;
