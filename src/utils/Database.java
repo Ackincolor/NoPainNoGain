@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class Database {
     private String url,user,password;
-    private Connection con;
+    private Connection con = null;
     /*
     * Chargement du driver de connexion a la base de données.
     * ceci ne s'execute qu'une seul fois
@@ -59,7 +59,8 @@ public class Database {
     }
     public void connect() throws SQLException
     {
-        this.con = DriverManager.getConnection(this.url,this.user,this.password);
+        if(this.con==null)
+            this.con = DriverManager.getConnection(this.url,this.user,this.password);
     }
     public Connection getConnection()
     {

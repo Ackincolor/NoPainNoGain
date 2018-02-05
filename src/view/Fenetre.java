@@ -9,6 +9,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.Boutique;
+import model.ListeBoutique;
 import model.Table;
 import utils.Constants;
 import utils.MyListModel;
@@ -43,12 +45,12 @@ public class Fenetre extends JFrame implements Runnable{
         ResultSet res = Constants.DB.getValueTable(this.selectedTable);
         try {
             ResultSetMetaData rsMetaData = res.getMetaData();
-            int numberOfColumns = rsMetaData.getColumnCount();
-            //recuperation des info
-            Array[] values = new Array[numberOfColumns];
-            for(int i=0;i<numberOfColumns;i++) {
-
-            }
+            ListeBoutique listeboutique = new ListeBoutique("Castorama");
+            listeboutique.setInfo(res);
+            JFrame f = new JFrame();
+            f.add(new JList<Boutique>(listeboutique.getModel()));
+            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            f.setVisible(true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
